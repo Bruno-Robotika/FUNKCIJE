@@ -13,7 +13,7 @@
 
 
 /** Constructor
-@param name - it is also used for Bluetooth so a Bluetooth client (like a phone) will list the device using this name.
+  @param name - it is also used for Bluetooth so a Bluetooth client (like a phone) will list the device using this name.
 */
 RobotLine::RobotLine(char name[]) : Robot(name) {
   // MotorGroup class drives the motors.
@@ -75,12 +75,12 @@ RobotLine::RobotLine(char name[]) : Robot(name) {
   // Set buttons' actions.
   // mrm_8x8a->actionSet(actionRCJLine, 0); // Button 1 starts RCJ Line.
   // mrm_8x8a->actionSet(actionEvacuationZone, 1); // Button 2 starts robot in evacution zone.
-  mrm_8x8a->actionSet(_actionLoop, 2); // Button 3 starts user defined loop() function
-  mrm_8x8a->actionSet(actionStop, 3); // Stop the robot
+  mrm_8x8a->actionSet(_actionLoop, 3); // Button 3 starts user defined loop() function
+  mrm_8x8a->actionSet(actionStop, 2); // Stop the robot
 
   // Put Your buttons' actions here.
 
-  // Depending on your wiring, it may be necessary to spin some motors in the other direction. 
+  // Depending on your wiring, it may be necessary to spin some motors in the other direction.
   mrm_mot4x3_6can->directionChange(0); // Uncomment to change 1st wheel's rotation direction
   mrm_mot4x3_6can->directionChange(1); // Uncomment to change 2nd wheel's rotation direction
   mrm_mot4x3_6can->directionChange(2); // Uncomment to change 3rd wheel's rotation direction
@@ -104,7 +104,7 @@ RobotLine::RobotLine(char name[]) : Robot(name) {
 void RobotLine::armCatch() {
   mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm. Parameter 0 defines servo, in this case lift-servo. LIFT_SERVO_DOWN is angle.
   mrm_servo->write(CATCH_SERVO_L_CATCH, 1); // Catch the ball. Parameter 1 - catch-servo. CATCH_SERVO_CLOSE is angle.
-  mrm_servo->write(CATCH_SERVO_R_CATCH, 2); // 
+  mrm_servo->write(CATCH_SERVO_R_CATCH, 2); //
 }
 
 void RobotLine::armOpen() {
@@ -117,11 +117,11 @@ void RobotLine::armOpen() {
 */
 void RobotLine::armCatchReady() {
   mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm.
-  mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-  mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+  mrm_servo->write(CATCH_SERVO_L_OPEN, 1); //
+  mrm_servo->write(CATCH_SERVO_R_OPEN, 2); //
 }
 
-/** 
+/**
 */
 void RobotLine::armClose() {
   servo(140, 0);
@@ -130,27 +130,27 @@ void RobotLine::armClose() {
 }
 
 
-/** 
+/**
 */
 void RobotLine::armDrop() {
   mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
-  mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-  mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+  mrm_servo->write(CATCH_SERVO_L_OPEN, 1); //
+  mrm_servo->write(CATCH_SERVO_R_OPEN, 2); //
 }
 
-/** 
+/**
 */
 void RobotLine::armUp() {
-  mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); // 
-  mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); // 
+  mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); //
+  mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); //
   mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
 }
 
 /** Barrier interrupted?
-* return interrupted or not
+  return interrupted or not
 */
 bool RobotLine::barrier() {
-  return analogRead(35) < barrierBrightest * 0.5; 
+  return analogRead(35) < barrierBrightest * 0.5;
 }
 
 /** Stores bitmaps in mrm-led8x8a.
@@ -163,7 +163,7 @@ void RobotLine::bitmapsSet() {
   uint8_t green[8];
 
   /* 1 will turn the pixel on, 0 off. 0bxxxxxxxx is a binary format of the number. Start with "0b" and list all the bits, starting from
-  the most significant one (MSB). Do that for each byte of the green and red arrays.*/
+    the most significant one (MSB). Do that for each byte of the green and red arrays.*/
 
   // Evacuation zone
   for (uint8_t i = 0; i < 8; i++)
@@ -197,7 +197,7 @@ void RobotLine::bitmapsSet() {
   red[6] = 0b00000000;
   red[7] = 0b00000000;
   /* Store this bitmap in mrm-8x8a. The 3rd parameter is bitmap's address. If You want to define new bitmaps, expand LedSign enum with
-  Your names, and use the new values for Your bitmaps. This parameter can be a plain number, but enum keeps thing tidy.*/
+    Your names, and use the new values for Your bitmaps. This parameter can be a plain number, but enum keeps thing tidy.*/
   mrm_8x8a->bitmapCustomStore(red, green, LED_LINE_FULL_BOTH_MARKS);
 
   // Full line, left mark.
@@ -549,7 +549,7 @@ void RobotLine::bitmapsSet() {
   mrm_8x8a->bitmapCustomStore(red, green, LED_WALL_R);
 
   // Define Your bitmaps here.
-    // Example
+  // Example
   green[0] = 0b00000001;
   green[1] = 0b00000011;
   green[2] = 0b00000111;
@@ -572,16 +572,16 @@ void RobotLine::bitmapsSet() {
 }
 
 /** Reads push button switch
-@number - 0 to 3, push button's ordinal number
-@return - true if pressed
+  @number - 0 to 3, push button's ordinal number
+  @return - true if pressed
 */
 bool RobotLine::button(uint8_t number) {
   return mrm_8x8a->switchRead(number);
 }
 
 /** Line sensor - brightness of the surface
-@param transistorNumber - starts from 0 and end value depends on sensor. Usually 7 (for mrm-ref-can8) or 8 (for mrm-ref-can9).
-@return - brightness as an analog value.
+  @param transistorNumber - starts from 0 and end value depends on sensor. Usually 7 (for mrm-ref-can8) or 8 (for mrm-ref-can9).
+  @return - brightness as an analog value.
 */
 uint16_t RobotLine::brightness(uint8_t transistorNumber) {
   return mrm_ref_can->reading(transistorNumber);
@@ -591,7 +591,7 @@ uint16_t RobotLine::brightness(uint8_t transistorNumber) {
 */
 void RobotLine::curve() {
   bool left = line(LAST_TRANSISTOR); // Otherwise right
-  display(left ? LED_CURVE_LEFT : LED_CURVE_RIGHT); 
+  display(left ? LED_CURVE_LEFT : LED_CURVE_RIGHT);
 
   // If a marker found, rotate and do not continue executing the rest of the function.
   if (markers() && (line(3) || line(4) || (LAST_TRANSISTOR == 8 && line(5)))) // Center line needed, too.
@@ -610,7 +610,7 @@ void RobotLine::curve() {
   if (!lineAny(2, 5)) {
     // Rotate
     stop();
-    print("CURVE\n\r"); 
+    print("CURVE\n\r");
     delayMs(2000);
     go(left ? -TOP_SPEED : TOP_SPEED, left ? TOP_SPEED : -TOP_SPEED); // Start rotating.
     startMs = millis();
@@ -631,21 +631,21 @@ void RobotLine::curve() {
 }
 
 /** Dark surface?
-* return dark or not
+  return dark or not
 */
 bool RobotLine::dark() {
   return analogRead(36) < 2000; // 2000 is an example. Test to find Your best value
 }
 
 /** Display 8x8 image
-@image - image's number
+  @image - image's number
 */
 void RobotLine::display(uint8_t image) {
   mrm_8x8a->bitmapCustomStoredDisplay(image);
 }
 
 /** Display 8x8 text
-@image - image's number
+  @image - image's number
 */
 void RobotLine::display(char* text) {
   mrm_8x8a->text(text);
@@ -683,45 +683,45 @@ void RobotLine::evacuationZone() {
 }
 
 /** Front distance in mm. Warning - the function will take considerable amount of time to execute if sampleCount > 0!
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - distance in mm
+  @return - distance in mm
 */
 uint16_t RobotLine::front(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(1, sampleCount, sigmaCount); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Front side - left distance in mm. Warning - the function will take considerable amount of time to execute if sampleCount > 0!
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - distance in mm
+  @return - distance in mm
 */
 uint16_t RobotLine::frontLeft(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(0, sampleCount, sigmaCount); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Front side - right distance in mm. Warning - the function will take considerable amount of time to execute if sampleCount > 0!
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - distance in mm
+  @return - distance in mm
 */
 uint16_t RobotLine::frontRight(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(2, sampleCount, sigmaCount); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Start motors
-@param leftSpeed, in range -127 to 127
-@param right Speed, in range -127 to 127
-@param speedLimit - Speed limit, 0 to 127. For example, 80 will limit all the speeds to 80/127%. 0 will turn the motors off.
+  @param leftSpeed, in range -127 to 127
+  @param right Speed, in range -127 to 127
+  @param speedLimit - Speed limit, 0 to 127. For example, 80 will limit all the speeds to 80/127%. 0 will turn the motors off.
 */
 void RobotLine::go(int16_t leftSpeed, int16_t rightSpeed) {
   motorGroup->go(leftSpeed, rightSpeed);
@@ -736,71 +736,71 @@ void RobotLine::goAhead() {
 }
 
 /**Compass
-@return - North is 0�, clockwise are positive angles, values 0 - 360.
+  @return - North is 0�, clockwise are positive angles, values 0 - 360.
 */
 float RobotLine::heading() {
   return mrm_imu->heading();
 }
 
 /** Color sensor's hue
-@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
-@return - Hue
+  @param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
+  @return - Hue
 */
 uint8_t RobotLine::hue(uint8_t deviceNumber) {
   return mrm_col_can->hue(deviceNumber);
 }
 
 /** Set color sensor's illumination intensity
-@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0. 0xFF - all sensors.
-@param current - 0 - 3
+  @param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0. 0xFF - all sensors.
+  @param current - 0 - 3
 */
 void RobotLine::illumination(uint8_t current, uint8_t deviceNumber) {
   return mrm_col_can->illumination(deviceNumber, current);
 }
 
 /** Left side - rear sensor distance.
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - in mm
+  @return - in mm
 */
 uint16_t RobotLine::leftBack(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(4, sampleCount, sigmaCount); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Left side - front sensor distance.
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - in mm
+  @return - in mm
 */
 uint16_t RobotLine::leftFront(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(0, sampleCount, sigmaCount); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Line found?
-@return - true if any sensor detects black.
-@param firstTransistor - start checking from this transistor.
-@param lastTransistor - do not check after this one.
+  @return - true if any sensor detects black.
+  @param firstTransistor - start checking from this transistor.
+  @param lastTransistor - do not check after this one.
 */
 bool RobotLine::lineAny(uint8_t firstTransistor, uint8_t lastTransistor) {
   return mrm_ref_can->any(true, 0, firstTransistor, lastTransistor);
 }
 
 /** Line sensor
-@param transistorNumber - starts from 0 and end value depends on sensor. Usually 7 (for mrm-ref-can8) or 8 (for mrm-ref-can9).
-@return - true if black line found
+  @param transistorNumber - starts from 0 and end value depends on sensor. Usually 7 (for mrm-ref-can8) or 8 (for mrm-ref-can9).
+  @return - true if black line found
 */
 bool RobotLine::line(uint8_t transistorNumber) {
   return mrm_ref_can->dark(transistorNumber);
 }
 
 /** Center of measurements, like center of the line
-@return - -50 - 50. If 0, center of the robot is on the line. Depending on sensor, this value is roughly number of milimeter the line is left or right.
+  @return - -50 - 50. If 0, center of the robot is on the line. Depending on sensor, this value is roughly number of milimeter the line is left or right.
 */
 float RobotLine::lineCenter() {
   return (mrm_ref_can->center() - 5000) / 80.0;
@@ -810,7 +810,7 @@ float RobotLine::lineCenter() {
 */
 void RobotLine::lineFollow() {
   static uint32_t ms = 0;
-  if (setup()){
+  if (setup()) {
     ms = millis();
     //armUp();
   }
@@ -836,11 +836,10 @@ void RobotLine::lineFollow() {
     go(70, 40);
   else if (line(4))
     go(70, 70);
+  else if (millis() - ms > 100)
+    stop();
   else
-    if (millis() - ms > 100)
-      stop();
-    else
-      go(70, 70);
+    go(70, 70);
   // static uint32_t lastLineFoundMs = millis(); // Used to measure gap in line.
 
   // // Obstacle?
@@ -873,7 +872,7 @@ void RobotLine::lineFollow() {
   //    }
   //  }
   //  // Edge sensor? If so, sharp bend.
-  //  else 
+  //  else
   //  #endif
   //  if (line(0) || line(LAST_TRANSISTOR))
   //    curve();
@@ -906,11 +905,26 @@ void RobotLine::loop() {
 
 /** Generic actions, use them as templates
 */
-void RobotLine::loop0() { armClose(); end();}
-void RobotLine::loop1() { armCatchReady(); end(); }
-void RobotLine::loop2() { armCatch(); end(); }
-void RobotLine::loop3() { armUp(); end(); }
-void RobotLine::loop4() { armDrop(); end(); }
+void RobotLine::loop0() {
+  armClose();
+  end();
+}
+void RobotLine::loop1() {
+  armCatchReady();
+  end();
+}
+void RobotLine::loop2() {
+  armCatch();
+  end();
+}
+void RobotLine::loop3() {
+  armUp();
+  end();
+}
+void RobotLine::loop4() {
+  armDrop();
+  end();
+}
 void RobotLine::loop5() { }
 void RobotLine::loop6() { }
 void RobotLine::loop7() {}
@@ -937,7 +951,7 @@ void RobotLine::loopMenu() {
 
 
 /** Check markers and turn if any found
-@return - true if marker found, false otherwise
+  @return - true if marker found, false otherwise
 */
 bool RobotLine::markers() {
   stop(); // Stop and wait to be sure the color sensor read new values.
@@ -984,8 +998,8 @@ bool RobotLine::markers() {
 
 
 /** Test motors
- */
-void RobotLine::motorShortTest(){
+*/
+void RobotLine::motorShortTest() {
   go(60, 60);
   delayMs(2000);
   go(-60, -60);
@@ -1000,7 +1014,7 @@ void RobotLine::obstacleAvoid() {
   print("Prepreka");
   go(50, -50);
   uint32_t lastLineMs = millis();
-  while (front() < 200 || frontLeft() < 200 || millis() - lastLineMs < 200){
+  while (front() < 200 || frontLeft() < 200 || millis() - lastLineMs < 200) {
     noLoopWithoutThis();
     if (lineAny())
       lastLineMs = millis();
@@ -1008,7 +1022,7 @@ void RobotLine::obstacleAvoid() {
   stop();
   print("Okrenut");
   delayMs(2000);
-  while(!lineAny()){
+  while (!lineAny()) {
     if (front() < 200 || frontLeft() < 200)
       go(50, 50);
     else
@@ -1030,9 +1044,9 @@ void RobotLine::obstacleAvoid() {
   // if (setup())
   //  display(LED_OBSTACLE); // Show a sign.
 
-  // /* Obstacle evasive maneuver is an action big enough to justify its own ActionBase derived object, ActionObstacleAvoid, which is being executed right now. 
-  // The maneuver itself consists of  different phases. Should all of them form ActionObstacleAvoid derived classes? Yes, that would be a good solution. However, 
-  // here we will show a solution that is not object oriented: a "switch" statement. During many runs of this function, static variable "part" will be slowly 
+  // /* Obstacle evasive maneuver is an action big enough to justify its own ActionBase derived object, ActionObstacleAvoid, which is being executed right now.
+  // The maneuver itself consists of  different phases. Should all of them form ActionObstacleAvoid derived classes? Yes, that would be a good solution. However,
+  // here we will show a solution that is not object oriented: a "switch" statement. During many runs of this function, static variable "part" will be slowly
   // changing its value from 0 up, marking different phases. The logic follows.
   // */
   // switch (part) {
@@ -1076,16 +1090,16 @@ void RobotLine::obstacleAvoid() {
 }
 
 /** Choose a pattern closest to the current 6 colors
-@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
-@param includeValue - if true, HSV compared. If not, HS.
-@raturn - patternNumber
+  @param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
+  @param includeValue - if true, HSV compared. If not, HS.
+  @raturn - patternNumber
 */
 uint8_t RobotLine::patternColors(uint8_t deviceNumber) {
   return mrm_col_can->patternRecognizedBy6Colors(deviceNumber);
 }
 
 /**Pitch
-@return - Pitch in degrees. Inclination forwards or backwards. Leveled robot shows 0�.
+  @return - Pitch in degrees. Inclination forwards or backwards. Leveled robot shows 0�.
 */
 float RobotLine::pitch() {
   return mrm_imu->pitch();
@@ -1107,88 +1121,88 @@ void RobotLine::rcjLine() {
 }
 
 /** Front distance in mm. Warning - the function will take considerable amount of time to execute if sampleCount > 0!
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - distance in mm
+  @return - distance in mm
 */
 uint16_t RobotLine::rightBack(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(3); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Front distance in mm. Warning - the function will take considerable amount of time to execute if sampleCount > 0!
-@param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
+  @param sampleCount - Number or readings. 40% of the raeadings, with extreme values, will be discarded and the
         rest will be averaged. Keeps returning 0 till all the sample is read.
         If sampleCount is 0, it will not wait but will just return the last value.
-@param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
+  @param sigmaCount - Values outiside sigmaCount sigmas will be filtered out. 1 sigma will leave 68% of the values, 2 sigma 95%, 3 sigma 99.7%.
         Therefore, lower sigma number will remove more errornous readings.
-@return - distance in mm
+  @return - distance in mm
 */
 uint16_t RobotLine::rightFront(uint8_t sampleCount, uint8_t sigmaCount) {
   return mrm_lid_can_b->distance(2); // Correct all sensors so that they return the same value for the same physical distance.
 }
 
 /** Roll
-@return - Roll in degrees. Inclination to the left or right. Values -90 - 90. Leveled robot shows 0�.
+  @return - Roll in degrees. Inclination to the left or right. Values -90 - 90. Leveled robot shows 0�.
 */
 
 
 /** Color sensor's saturation
-@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
-@return - saturation.
+  @param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
+  @return - saturation.
 */
 uint8_t RobotLine::saturation(uint8_t deviceNumber) {
   return mrm_col_can->saturation(deviceNumber);
 }
 
 /** Move servo
-@param degrees - Servo's target angle, 0 - 180°, or 0 - 360°, depending on model, counting clockwise
-@param servoNumber - Servo's ordinal number. Each call of function add() assigns a increasing number to the servo, starting with 0.
+  @param degrees - Servo's target angle, 0 - 180°, or 0 - 360°, depending on model, counting clockwise
+  @param servoNumber - Servo's ordinal number. Each call of function add() assigns a increasing number to the servo, starting with 0.
 */
-void RobotLine::servo(uint16_t degrees, uint8_t servoNumber){
+void RobotLine::servo(uint16_t degrees, uint8_t servoNumber) {
   switch (servoNumber)
   {
-  case 0:
-    if (degrees <= 130){
-      return mrm_servo->write(130, servoNumber);
-    }
-    else if (degrees >= 160){
-      return mrm_servo->write(160, servoNumber);
-    }
-    else{
-      return mrm_servo->write(degrees, servoNumber);
-    }
-    break;
-  case 1:
-    if (degrees <= 0){
-      return mrm_servo->write(0, servoNumber);
-    }
-    else if (degrees >= 90){
-      return mrm_servo->write(90, servoNumber);
-    }
-    else{
-      return mrm_servo->write(degrees, servoNumber);
-    }
-    break;
-  case 2:
-    if (degrees <= 0){
-      return mrm_servo->write(0, servoNumber);
-    }
-    else if (degrees >= 90){
-      return mrm_servo->write(90, servoNumber);
-    }
-    else{
-      return mrm_servo->write(degrees, servoNumber);
-    }
-    break;
+    case 0:
+      if (degrees <= 130) {
+        return mrm_servo->write(130, servoNumber);
+      }
+      else if (degrees >= 160) {
+        return mrm_servo->write(160, servoNumber);
+      }
+      else {
+        return mrm_servo->write(degrees, servoNumber);
+      }
+      break;
+    case 1:
+      if (degrees <= 0) {
+        return mrm_servo->write(0, servoNumber);
+      }
+      else if (degrees >= 90) {
+        return mrm_servo->write(90, servoNumber);
+      }
+      else {
+        return mrm_servo->write(degrees, servoNumber);
+      }
+      break;
+    case 2:
+      if (degrees <= 0) {
+        return mrm_servo->write(0, servoNumber);
+      }
+      else if (degrees >= 90) {
+        return mrm_servo->write(90, servoNumber);
+      }
+      else {
+        return mrm_servo->write(degrees, servoNumber);
+      }
+      break;
 
   }
 }
 
 /** Display fixed sign stored in sensor
-@image - sign's number
+  @image - sign's number
 */
 void RobotLine::sign(uint8_t number) {
   mrm_8x8a->bitmapDisplay(number);
@@ -1201,9 +1215,9 @@ void RobotLine::stop() {
 }
 
 /** Store 8x8 image to 8x8 LED's internal memory
-@red - red pixels
-@green - green pixels
-@image - image's number
+  @red - red pixels
+  @green - green pixels
+  @image - image's number
 */
 void RobotLine::store(uint8_t red[], uint8_t green[], uint8_t image) {
   mrm_8x8a->bitmapCustomStore(red, green, image);
@@ -1211,8 +1225,8 @@ void RobotLine::store(uint8_t red[], uint8_t green[], uint8_t image) {
 
 
 /** Prints line and color sensors. Used for debugging.
-@param newLine - new line
-@param delayMsAfterPrint - delay after print
+  @param newLine - new line
+  @param delayMsAfterPrint - delay after print
 */
 void RobotLine::surfacePrint(bool newLine, uint16_t delayMsAfterPrint) {
   print("%i/%i/%i ", mrm_col_can->hue(0), mrm_col_can->saturation(0), mrm_col_can->value(0));
@@ -1226,7 +1240,7 @@ void RobotLine::surfacePrint(bool newLine, uint16_t delayMsAfterPrint) {
 }
 
 /** Turns the robot clockwise using compass.
-@param byDegreesClockwise - turn by defined number of degrees.
+  @param byDegreesClockwise - turn by defined number of degrees.
 */
 void RobotLine::turn(int16_t byDegreesClockwise) {
   go(TOP_SPEED, TOP_SPEED); // Go ahead at top speed.
@@ -1246,8 +1260,8 @@ void RobotLine::turn(int16_t byDegreesClockwise) {
 }
 
 /** Color sensor's value
-@param deviceNumber - device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
-@return - value
+  @param deviceNumber - device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
+  @return - value
 */
 uint8_t RobotLine::value(uint8_t deviceNumber) {
   return mrm_col_can->value(deviceNumber);
@@ -1265,7 +1279,7 @@ void RobotLine::wallFollow() {
   bool lastFollowedLeft = false; // Used to determine where to turn if wall ahead.
 
   // Follow wall
-  if (wallLeft() || wallRight()){
+  if (wallLeft() || wallRight()) {
     lastFollowedLeft = (wallLeft() && !wallRight()) || (wallLeft() && wallRight() && leftFront() < rightFront()); // Choose closer wall
     display(lastFollowedLeft ? LED_WALL_L : LED_WALL_R);
 
@@ -1352,34 +1366,34 @@ void RobotLine::wallFollow() {
 #endif
 
 /** Wall left?
-@return - true if wall
+  @return - true if wall
 */
 bool RobotLine::wallLeft() {
   return leftFront() < MAXIMUM_WALL_MM && leftBack() < MAXIMUM_WALL_MM && abs(leftFront() - leftBack()) < WALL_DIFFERENCE_ALLOWED_MM;
 }
 
 /** Wall right?
-@return - true if wall
+  @return - true if wall
 */
 bool RobotLine::wallRight() {
   return rightFront() < MAXIMUM_WALL_MM && rightBack() < MAXIMUM_WALL_MM && abs(rightFront() - rightBack()) < WALL_DIFFERENCE_ALLOWED_MM;
 }
 
-void RobotLine::pratiDesniZid(){
+void RobotLine::pratiDesniZid() {
 
   armOpen();
   if (rightFront() > 120)
-     go(80, 20);
-   else
+    go(80, 20);
+  else
     go(20, 80);
 
 }
-void RobotLine::pratiLijeviZid(){
- 
- armOpen();
+void RobotLine::pratiLijeviZid() {
+
+  armOpen();
   if (leftFront() > 120)
-     go(20, 80);
-   else
+    go(20, 80);
+  else
     go(80, 20);
 
 }
@@ -1389,24 +1403,24 @@ void RobotLine::pratiLijeviZid(){
 void RobotLine::Pratiliniju()
 {
   if (line(8))
-     go(-90, 90);
-   else if (line(0))
+    go(-90, 90);
+  else if (line(0))
     go(90, -90);
-   else if (line(7))
+  else if (line(7))
     go(0, 100);
-   else if (line(1))
+  else if (line(1))
     go(100, 0);
-   else if (line(6))
+  else if (line(6))
     go(30, 80);
-   else if (line(2))
+  else if (line(2))
     go(80, 30);
-   else if (line(5))
+  else if (line(5))
     go(40, 70);
-   else if (line(3))
+  else if (line(3))
     go(70, 40);
-   else if (line(4))
+  else if (line(4))
     go(70, 70);
-   else
+  else
     go(60, 70);
 
 }
@@ -1415,25 +1429,82 @@ void RobotLine::Pratiliniju()
 void RobotLine::PratilinijuBrzo()
 {
   if (line(8))
-     go(-120, 120);
-   else if (line(0))
+    go(-120, 120);
+  else if (line(0))
     go(80, -100);
-   else if (line(7))
+  else if (line(7))
     go(050, 150);
-   else if (line(1))
+  else if (line(1))
     go(60, -60);
-   else if (line(6))
+  else if (line(6))
     go(-10, 40);
-   else if (line(2))
+  else if (line(2))
     go(100, 50);
-   else if (line(5))
+  else if (line(5))
     go(30, 60);
-   else if (line(3))
+  else if (line(3))
     go(80, 50);
-   else if (line(4))
+  else if (line(4))
     go(100, 100);
-   else
+  else
     go(120, 120);
 
 }
 
+void RobotLine::Zaobidi()
+{
+  PratilinijuBrzo();
+  if (front() < 120) {
+    go(-90, 90);
+    delayMs(500);
+    go(50, 50);
+    delayMs(1000);
+    go(90, -90);
+    delayMs(500);
+    go(50, 50);
+    delayMs(2000);
+    go(90, -90);
+    delayMs(500);
+    go(50, 50);
+    delayMs(1000);
+  }
+}
+
+
+void RobotLine::UhvatiLopticu() 
+     {
+    pratiLijeviZid();
+  if (frontRight() < 120) {
+    go(90, -90);
+    delayMs(500);
+    go(50, 50);
+    delayMs(1000);
+    armClose();
+    go((-50), (-50));
+    delayMs(1000);
+    stop();
+    end();
+  }
+
+}
+
+void RobotLine::Raskrizje()
+   {
+  if (line(0) && line(8)) {
+    go(-90, 90);
+    delayMs(500);
+
+  }
+
+}
+
+void RobotLine::PolaRaskrizja()
+
+  {
+  if (line(0) && line(5)) {
+    go(90, 90);
+    delayMs(500);
+
+  }
+
+}
