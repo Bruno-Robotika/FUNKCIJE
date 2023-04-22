@@ -98,6 +98,10 @@ public:
   void pratiLijeviZid();
   void Pratiliniju();
   void PratilinijuBrzo();
+  void Zaobidi();
+  void UhvatiLopticu();
+  void Raskrizje();
+  void PolaRaskrizja();
   
  void armOpen();
   /** Arm will close.
