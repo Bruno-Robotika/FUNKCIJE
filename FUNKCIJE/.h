@@ -102,7 +102,8 @@ public:
   void UhvatiLopticu();
   void Raskrizje();
   void PolaRaskrizja();
-  
+  void Uzbrdica();
+
  void armOpen();
   /** Arm will close.
   */  
