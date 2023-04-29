@@ -1466,7 +1466,7 @@ void RobotLine::Zaobidi()
     go(90, -90);
     delayMs(500);
     go(50, 50);
-    delayMs(1000);
+    delayMs(1000);;
   }
 }
 
@@ -1501,10 +1501,22 @@ void RobotLine::Raskrizje()
 void RobotLine::PolaRaskrizja()
 
   {
-  if (line(0) && line(5)) {
+  if (line(8) && line(5)) {
     go(90, 90);
     delayMs(500);
 
   }
 
+  }
+
+void RobotLine::Uzbrdica()
+
+  {
+  if (pitch() < -10) {
+    go(100, 100);
+    delayMs(1000);
+
+  }
+
 }
+ 
