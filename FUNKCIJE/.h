@@ -88,7 +88,7 @@ class RobotLine : public Robot {
 
 public:
   /** Constructor
-  @param name - it is also used for Bluetooth so a Bluetooth client (like a phone) will list the device using this name.
+  @param name - it is also used for BluAetooth so a Bluetooth client (like a phone) will list the device using this name.
   */
   RobotLine(char name[] = (char*)"RCJ Line"); // Maximum 15 characters
 
@@ -99,7 +99,7 @@ public:
   void Pratiliniju();
   void PratilinijuBrzo();
   void Zaobidi();
-  void UhvatiLopticu();
+  void UhvatiLopicu();
   void Raskrizje();
   void PolaRaskrizja();
   void Uzbrdica();
