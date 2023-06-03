@@ -1381,7 +1381,10 @@ bool RobotLine::wallRight() {
 
 void RobotLine::pratiDesniZid() {
 
-  armOpen();
+  if(setup()){
+    armOpen();
+  }
+  
   if (rightFront() > 120)
     go(80, 20);
   else
@@ -1473,20 +1476,42 @@ void RobotLine::Zaobidi()
 
 void RobotLine::UhvatiLopticu() 
      {
-    pratiLijeviZid();
-  if (frontRight() < 120) {
+    pratiDesniZid();
+  if(front() < 120){
+    go(-90, 90);
+    delayMs(500);
+  }
+  if (frontLeft() < 120) {
+    go(50, 50);
+    delayMs(700);
+    go(-90, 90);
+    delayMs(600);
+    go(50, 50);
+    delayMs(2000);
+    armClose();
+    go(-50, -50);
+    delayMs(2000);
     go(90, -90);
+    delayMs(700);
+    
+    }
+  if (lineAny()){
+    armOpen();
+    go(-50, -50);
+    delayMs(500);
+    go(-90, 90);
     delayMs(500);
     go(50, 50);
-    delayMs(1000);
-    armClose();
-    go((-50), (-50));
-    delayMs(1000);
-    stop();
-    end();
+    delayMs(400);
+    go(90, -90);
+    delayMs(300);
+    go(-90, 90);
+    delayMs(200);
+
+    }
   }
 
-}
+
 
 void RobotLine::Raskrizje()
    {
