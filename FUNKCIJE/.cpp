@@ -1381,10 +1381,10 @@ bool RobotLine::wallRight() {
 
 void RobotLine::pratiDesniZid() {
 
-  if(setup()){
+  if (setup()) {
     armOpen();
   }
-  
+
   if (rightFront() > 120)
     go(80, 20);
   else
@@ -1474,10 +1474,10 @@ void RobotLine::Zaobidi()
 }
 
 
-void RobotLine::UhvatiLopticu() 
-     {
-    pratiDesniZid();
-  if(front() < 120){
+void RobotLine::UhvatiLopticu()
+{
+  pratiDesniZid();
+  if (front() < 120) {
     go(-90, 90);
     delayMs(500);
   }
@@ -1493,28 +1493,32 @@ void RobotLine::UhvatiLopticu()
     delayMs(2000);
     go(90, -90);
     delayMs(700);
-    
-    }
-  if (lineAny()){
+
+  }
+  if (lineAny()) {
     armOpen();
     go(-50, -50);
     delayMs(500);
     go(-90, 90);
-    delayMs(500);
-    go(50, 50);
-    delayMs(400);
-    go(90, -90);
     delayMs(300);
-    go(-90, 90);
+    go(50, 50);
+    delayMs(500);
+    go(90, -90);
+    delayMs(400);
+    go(50, 50);
     delayMs(200);
+    go(-90, 90);
+    delayMs(300);
 
-    }
+
   }
+}
 
 
 
 void RobotLine::Raskrizje()
-   {
+{
+  Pratiliniju();
   if (line(0) && line(8)) {
     go(-90, 90);
     delayMs(500);
@@ -1525,18 +1529,18 @@ void RobotLine::Raskrizje()
 
 void RobotLine::PolaRaskrizja()
 
-  {
+{
   if (line(8) && line(5)) {
     go(90, 90);
     delayMs(500);
 
   }
 
-  }
+}
 
 void RobotLine::Uzbrdica()
 
-  {
+{
   if (pitch() < -10) {
     go(100, 100);
     delayMs(1000);
@@ -1544,4 +1548,29 @@ void RobotLine::Uzbrdica()
   }
 
 }
- 
+
+void RobotLine::Memory()
+
+{
+
+  Pratiliniju();
+  if (line(1) && line(7)) {
+    go(-90, 90);
+    delayMs(600);
+    go(50, 50);
+    delayMs(1500),
+            go(-90, 90);
+    delayMs(1100);
+    go(50, 50);
+    delayMs(1000);
+    go(-90, 90);
+    delayMs(500);
+
+
+
+
+
+
+
+  }
+}
