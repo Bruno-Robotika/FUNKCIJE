@@ -99,10 +99,12 @@ public:
   void Pratiliniju();
   void PratilinijuBrzo();
   void Zaobidi();
-  void UhvatiLopicu();
+  void UhvatiLopticu();
   void Raskrizje();
   void PolaRaskrizja();
   void Uzbrdica();
+  void Memory();
+  
 
  void armOpen();
   /** Arm will close.
