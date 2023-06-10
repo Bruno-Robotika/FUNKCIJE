@@ -3,8 +3,9 @@
 
 
 void RobotLine::radionica(){
-UhvatiLopticu();
+  
+ Memory();
 }
 
-
+  
                                                        
