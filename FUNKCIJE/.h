@@ -54,6 +54,8 @@ class ActionLoopMenu;
 /** Robot for RCJ Rescue Line, a class derived from the base Robot class.
 */
 class RobotLine : public Robot {
+
+  
   uint16_t BIGGEST_GAP_IN_LINE_MS = 2500;
   // Changing this parameter will cause major behaviour change. Limit value: 127.
   const uint8_t TOP_SPEED = 90; // 7.4 V 80 11.1 V 60
