@@ -836,8 +836,9 @@ void RobotLine::lineFollow() {
     go(70, 40);
   else if (line(4))
     go(70, 70);
-  else if (millis() - ms > 100)
+  else if (millis() - ms > 100){
     stop();
+  } 
   else
     go(70, 70);
   // static uint32_t lastLineFoundMs = millis(); // Used to measure gap in line.
@@ -1556,13 +1557,13 @@ void RobotLine::Memory()
   Pratiliniju();
   if (line(1) && line(7)) {
     go(-90, 90);
-    delayMs(600);
+    delayMs(550);
     go(50, 50);
     delayMs(1500),
-            go(-90, 90);
-    delayMs(1100);
+    go(-90, 90);
+    delayMs(1300);
     go(50, 50);
-    delayMs(1000);
+    delayMs(1200);
     go(-90, 90);
     delayMs(500);
 
